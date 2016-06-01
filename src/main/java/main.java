@@ -3,6 +3,7 @@
  */
 
 import spark.ModelAndView;
+import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ public class main {
         Class.forName("org.h2.Driver");
         creandoTabla();
 
-        //staticFileLocation("/publico");
+        Spark.staticFileLocation("/publico");
         get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("message", "Hello Francis");
@@ -44,7 +45,7 @@ public class main {
             Statement statement = con.createStatement();
             statement.execute(sql);
             statement.close();
-            con.close();
+            //con.close();
         } catch( SQLException e ){
             System.out.print( e.getMessage() );
         }

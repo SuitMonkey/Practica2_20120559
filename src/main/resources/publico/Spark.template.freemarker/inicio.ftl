@@ -11,12 +11,17 @@
             <div class="header">
                 <nav>
                     <div class="navbar navbar-fixed-top">
-                        <div class="navbar-brand">Practica2</div>
+                        <div class="container">
+
+                            <div class="navbar-brand">Practica2</div>
+
+                        </div>
+
                     </div>
                 </nav>
             </div>
             <div class="body">
-
+                <h1>$(message)</h1>
             </div>
             <div class="footer">
 

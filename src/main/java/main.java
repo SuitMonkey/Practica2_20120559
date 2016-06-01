@@ -21,12 +21,12 @@ public class main {
         Class.forName("org.h2.Driver");
         creandoTabla();
 
-        //staticFileLocation("/");
+        //staticFileLocation("/publico");
         get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello Francis, let me suck you!");
+            attributes.put("message", "Hello Francis");
 
-            return new ModelAndView(attributes, "/inicio.ftl");
+            return new ModelAndView(attributes, "inicio.ftl");
         }, new FreeMarkerEngine());
 
     }

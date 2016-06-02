@@ -2,6 +2,7 @@
  * Created by Francis Cáceres on 29/5/2016.
  */
 
+import freemarker.template.Configuration;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -19,16 +20,19 @@ import static spark.Spark.*;
 public class main {
     public static void main(String [] args) throws Exception{
 
+        Configuration configuration = new Configuration();
+        configuration.setClassForTemplateLoading(main.class, "/templates");
+        FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine( configuration );
+
         Class.forName("org.h2.Driver");
         creandoTabla();
 
-        Spark.staticFileLocation("/publico");
         get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("message", "Hello Francis");
 
             return new ModelAndView(attributes, "inicio.ftl");
-        }, new FreeMarkerEngine());
+        }, freeMarkerEngine);
 
     }
     public static void creandoTabla() throws SQLException{

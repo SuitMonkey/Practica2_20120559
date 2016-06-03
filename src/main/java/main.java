@@ -41,6 +41,19 @@ public class main {
             return new ModelAndView(attributes, "agregar.ftl");
         }, freeMarkerEngine);
 
+        post("/agregar", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            int mat = Integer.parseInt(request.queryParams("matricula"));
+            String nom = request.queryParams("Nombre");
+            String ape = request.queryParams("Apellido");
+            String tel = request.queryParams("Telefono");
+            String car = request.queryParams("Carrera");
+
+            Estudiante est = new Estudiante(mat,nom,ape,tel,car);
+            base.insertar(est);
+            return new ModelAndView(attributes, "agregar.ftl");
+        }, freeMarkerEngine);
+
 
         get("/editar", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();

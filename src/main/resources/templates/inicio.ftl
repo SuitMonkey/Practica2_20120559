@@ -32,6 +32,7 @@
                 <h3 style="text-align: center">
                     <#list estudiantes as est>
                         <p>${est.getNombre()}</p>
+
                     </#list>
                 </h3>
             </div>

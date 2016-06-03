@@ -28,9 +28,31 @@
     <br>
     <br>
     <div class="container">
-        <h1>${message}</h1>
 
-        </h3>
+
+        <form action="/agregar" method="post">
+            <fieldset class="form-group">
+                <label for="Matricula">Matricula</label>
+                <input type="number" class="form-control" name="matricula" placeholder="Ingrese matricula">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" name="Nombre" placeholder="Nombre">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="Apellido">Apellido</label>
+                <input type="text" class="form-control" name="Apellido" placeholder="Apellido">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="Telefono">Telefono</label>
+                <input type="text" class="form-control" name="Telefono" placeholder="809-XXX-XXXX">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="Carrera">Carrera</label>
+                <input type="text" class="form-control" name="Carrera" placeholder="ISC">
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Listo</button>
+        </form>
     </div>
     <div class="footer">
 

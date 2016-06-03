@@ -3,14 +3,12 @@
  */
 
 import freemarker.template.Configuration;
+import org.h2.jdbcx.JdbcConnectionPool;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,36 +22,38 @@ public class main {
         configuration.setClassForTemplateLoading(main.class, "/templates");
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine( configuration );
 
-        Class.forName("org.h2.Driver");
-        creandoTabla();
+        DataBase base = new DataBase();
+
 
         get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("message", "Hello Francis");
+            attributes.put("estudiantes",base.listar());
 
             return new ModelAndView(attributes, "inicio.ftl");
         }, freeMarkerEngine);
 
+        get("/agregar", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("message", "Hello Francis");
+
+
+            return new ModelAndView(attributes, "agregar.ftl");
+        }, freeMarkerEngine);
+
+
+        get("/editar", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("message", "Hello Francis");
+
+
+            return new ModelAndView(attributes, "editar.ftl");
+        }, freeMarkerEngine);
+
     }
-    public static void creandoTabla() throws SQLException{
-        String sql = "CREATE TABLE IF NOT EXISTS ESTUDIANTE\n" +
-                "(\n" +
-                "  MATRICULA INTEGER PRIMARY KEY NOT NULL,\n" +
-                "  NOMBRE VARCHAR(50) NOT NULL,\n" +
-                "  APELLIDO VARCHAR(50) NOT NULL,\n" +
-                "  TELEFONO VARCHAR(25) NOT NULL,\n" +
-                "  CARRERA VARCHAR(50) NOT NULL\n" +
-                ");";
-        try {
-            Connection con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/practica2", "sa", "");
-            Statement statement = con.createStatement();
-            statement.execute(sql);
-            statement.close();
-            //con.close();
-        } catch( SQLException e ){
-            System.out.print( e.getMessage() );
-        }
-    }
+
+
+
 
 }
 

@@ -10,8 +10,16 @@ public class Estudiante {
     private String telefono;
     private String carrera;
 
+    public Estudiante(){
 
-    public Estudiante() {
+    }
+
+    public Estudiante(int matricula, String nombre, String apellido, String telefono, String carrera) {
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.carrera = carrera;
     }
 
     public int getMatricula() {

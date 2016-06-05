@@ -38,7 +38,7 @@ public class DataBase {
         ResultSet rs = stmt.executeQuery(sql);
         ArrayList<Estudiante> listEst = new ArrayList<Estudiante>();
         while(rs.next()){
-            Integer  MATRICULA = rs.getInt("MATRICULA");
+            String  MATRICULA = rs.getString("MATRICULA");
             String  NOMBRE = rs.getString("NOMBRE");
             String APELLIDO = rs.getString("APELLIDO");
             String TELEFONO = rs.getString("TELEFONO");
@@ -64,7 +64,7 @@ public class DataBase {
 
             PreparedStatement prepareStatement = con.prepareStatement(query);
             //Antes de ejecutar seteo los parametros.
-            prepareStatement.setInt(1, est.getMatricula());
+            prepareStatement.setString(1, est.getMatricula());
             prepareStatement.setString(2, est.getNombre());
             prepareStatement.setString(3, est.getApellido());
             prepareStatement.setString(4, est.getTelefono());
@@ -72,11 +72,64 @@ public class DataBase {
             //
             prepareStatement.executeUpdate();
 
-
+            con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
+    }
+
+    public void actu(Estudiante est){
+        Connection con = inicioConexion();
+        try {
+
+            String query = "update estudiante set nombre=?, apellido=?, telefono=?, carrera=? where matricula = ?";
+
+            PreparedStatement prepareStatement = con.prepareStatement(query);
+            //Antes de ejecutar seteo los parametros.
+            prepareStatement.setString(1, est.getNombre());
+            prepareStatement.setString(2, est.getApellido());
+            prepareStatement.setString(3, est.getTelefono());
+            prepareStatement.setString(4, est.getCarrera());
+            //Indica el where...
+            prepareStatement.setString(5, est.getMatricula());
+            //
+            prepareStatement.executeUpdate();
+            System.out.println("oooooooook");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    public void borrar(String matricula){
+        Connection con = inicioConexion();
+        try {
+
+            String query = "delete from estudiante where matricula = ?";
+            //
+            PreparedStatement prepareStatement = con.prepareStatement(query);
+
+            //Indica el where...
+            prepareStatement.setString(1, matricula);
+            //
+            prepareStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public Connection inicioConexion()  {
@@ -96,6 +149,8 @@ public class DataBase {
 
         return con;
     }
+
+
 
 
 }

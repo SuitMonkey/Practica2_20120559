@@ -43,7 +43,7 @@ public class main {
 
         post("/agregar", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            int mat = Integer.parseInt(request.queryParams("matricula"));
+            String mat = request.queryParams("matricula");
             String nom = request.queryParams("Nombre");
             String ape = request.queryParams("Apellido");
             String tel = request.queryParams("Telefono");
@@ -58,9 +58,45 @@ public class main {
         get("/editar", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("message", "Hello Francis");
+            String matr = request.queryParams("mat");
+            attributes.put("matrEdit",matr);
 
 
             return new ModelAndView(attributes, "editar.ftl");
+        }, freeMarkerEngine);
+
+        post("/", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+
+            attributes.put("message", "Hello Francis");
+            String mat = request.queryParams("matricula");
+            String nom = request.queryParams("Nombre");
+            String ape = request.queryParams("Apellido");
+            String tel = request.queryParams("Telefono");
+            String car = request.queryParams("Carrera");
+
+            Estudiante est = new Estudiante(mat,nom,ape,tel,car);
+            base.actu(est);
+            attributes.put("estudiantes",base.listar());
+
+            return new ModelAndView(attributes, "inicio.ftl");
+        }, freeMarkerEngine);
+
+        get("/eliminar", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            String matr = request.queryParams("mat");
+            attributes.put("mat",matr);
+
+
+            return new ModelAndView(attributes, "eliminar.ftl");
+        }, freeMarkerEngine);
+
+        post("/eliminar", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            String mat = request.queryParams("eliminar");
+            base.borrar(mat);
+
+            return new ModelAndView(attributes, "eliminar.ftl");
         }, freeMarkerEngine);
 
     }

@@ -30,10 +30,10 @@
     <div class="container">
 
 
-        <form action="/agregar" method="post">
+        <form action="/editar?mat=${est.getMatricula()}" method="post">
             <fieldset class="form-group">
                 <label for="Matricula">Matricula</label>
-                <input type="number" class="form-control" name="matricula" placeholder="Ingrese matricula">
+                <input type="text" class="form-control" name="matricula" placeholder="Ingrese matricula">
             </fieldset>
             <fieldset class="form-group">
                 <label for="Nombre">Nombre</label>

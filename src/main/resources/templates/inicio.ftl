@@ -18,7 +18,6 @@
                                 <ul class="nav navbar-nav">
                                     <li><a href="/">Listar</a> </li>
                                     <li><a href="/agregar">Agregar</a></li>
-                                    <li><a href="/editar">Editar</a></li>
                                  </ul>
                         </div>
                     </div>
@@ -29,12 +28,31 @@
             <br>
             <div class="container">
                 <h1>${message}</h1>
-                <h3 style="text-align: center">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Matricula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Telefono</th>
+                        <th>Carrera</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <#list estudiantes as est>
-                        <p>${est.getNombre()}</p>
+                    <tr>
 
+                        <td><a href="/editar?mat=${est.getMatricula()}">${est.getMatricula()}</a></td>
+                        <td>${est.getNombre()}</td>
+                        <td>${est.getApellido()}</td>
+                        <td>${est.getTelefono()}</td>
+                        <td>${est.getCarrera()}</td>
+                    </tr>
+                    </tbody>
                     </#list>
-                </h3>
+                </table>
+
+
             </div>
             <div class="footer">
 
